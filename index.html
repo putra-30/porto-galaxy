@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mochammad Galaxy Yamilkha Febre — Portofolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14171a;
+    --bg-alt:#191d21;
+    --card:#1c2126;
+    --line:#2a3036;
+    --text:#eceef0;
+    --muted:#8b94a0;
+    --muted-2:#5f6874;
+    --accent:#ffb020;
+    --accent-dim:rgba(255,176,32,0.14);
+    --radius:2px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#14171a;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+
+  /* background grid texture */
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 90%);
+  }
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(20,23,26,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1080px;margin:0 auto;
+  }
+  .logo{
+    font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:500;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 8px var(--accent);animation:blink 2.4s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .nav-links{display:flex;gap:34px;list-style:none;}
+  .nav-links a{
+    font-size:13.5px;color:var(--muted);font-family:'JetBrains Mono',monospace;
+    transition:color .2s;position:relative;
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a::before{content:"";}
+  .menu-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-btn span{width:22px;height:2px;background:var(--text);display:block;}
+  .mobile-panel{
+    display:none;position:fixed;top:60px;left:0;right:0;background:var(--bg-alt);
+    border-bottom:1px solid var(--line);z-index:99;padding:8px 32px 24px;
+  }
+  .mobile-panel.open{display:block;}
+  .mobile-panel a{display:block;padding:12px 0;font-family:'JetBrains Mono',monospace;
+    font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding:120px 0 80px;position:relative;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);
+    letter-spacing:.03em;margin-bottom:18px;display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:20px;height:1px;background:var(--accent);display:inline-block;}
+  .hero h1{
+    font-size:clamp(38px,5.2vw,64px);line-height:1.05;margin-bottom:22px;
+  }
+  .hero h1 .accent{color:var(--accent);}
+  .hero p.lead{
+    color:var(--muted);font-size:17px;max-width:520px;margin-bottom:34px;
+  }
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;padding:13px 22px;
+    border-radius:var(--radius);border:1px solid var(--line);transition:all .2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--accent);color:#14171a;border-color:var(--accent);font-weight:500;}
+  .btn-primary:hover{background:#ffc450;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted-2);background:var(--card);}
+
+  .quick-meta{display:flex;gap:28px;flex-wrap:wrap;}
+  .quick-meta div{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);}
+  .quick-meta b{display:block;color:var(--text);font-size:13.5px;font-weight:500;margin-bottom:3px;font-family:'Inter',sans-serif;}
+
+  /* PHOTO FRAME */
+  .photo-wrap{position:relative;}
+  .photo-frame{
+    aspect-ratio:4/5;width:100%;border-radius:6px;
+    border:1px solid var(--line);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 14px),
+      var(--card);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    gap:14px;position:relative;overflow:hidden;
+  }
+  .photo-frame img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:none;}
+  .photo-frame .ph-icon{color:var(--muted-2);opacity:.7;}
+  .photo-frame .ph-text{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);text-align:center;padding:0 30px;line-height:1.7;}
+  .corner{position:absolute;width:16px;height:16px;border-color:var(--accent);opacity:.55;}
+  .corner.tl{top:12px;left:12px;border-top:2px solid;border-left:2px solid;}
+  .corner.tr{top:12px;right:12px;border-top:2px solid;border-right:2px solid;}
+  .corner.bl{bottom:12px;left:12px;border-bottom:2px solid;border-left:2px solid;}
+  .corner.br{bottom:12px;right:12px;border-bottom:2px solid;border-right:2px solid;}
+  .status-tag{
+    position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);
+    background:var(--bg);border:1px solid var(--line);border-radius:20px;
+    padding:8px 18px;font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    display:flex;align-items:center;gap:8px;white-space:nowrap;color:var(--muted);
+  }
+  .status-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 6px var(--accent);animation:blink 2.4s ease-in-out infinite;}
+
+  /* SECTION SHARED */
+  section{padding:110px 0;border-top:1px solid var(--line);position:relative;}
+  .sec-head{margin-bottom:52px;}
+  .sec-head .eyebrow{margin-bottom:14px;}
+  .sec-head h2{font-size:clamp(26px,3vw,36px);}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px;}
+  .about-grid p{color:var(--muted);font-size:16px;margin-bottom:18px;}
+  .about-grid p b{color:var(--text);font-weight:500;}
+  .fact-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);}
+  .fact{display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line);}
+  .fact span:first-child{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);}
+  .fact span:last-child{font-size:14.5px;text-align:right;max-width:60%;}
+
+  /* SKILLS */
+  .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px;}
+  .iface-list{display:flex;flex-direction:column;gap:0;}
+  .iface{
+    display:grid;grid-template-columns:74px 1fr;gap:20px;padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .iface:first-child{border-top:1px solid var(--line);}
+  .iface-id{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);padding-top:2px;}
+  .iface h3{font-size:16.5px;font-weight:500;margin-bottom:6px;font-family:'Inter',sans-serif;}
+  .iface p{color:var(--muted);font-size:14px;}
+  .subhead{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);margin-bottom:20px;letter-spacing:.04em;}
+  .tag-cloud{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);
+    border:1px solid var(--line);padding:9px 15px;border-radius:20px;transition:.2s;
+  }
+  .tag:hover{border-color:var(--accent);color:var(--text);}
+
+  /* TIMELINE (experience & education) */
+  .timeline{position:relative;padding-left:28px;border-left:1px solid var(--line);}
+  .t-item{position:relative;padding-bottom:48px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";position:absolute;left:-33px;top:4px;width:9px;height:9px;
+    border-radius:50%;background:var(--bg);border:2px solid var(--accent);
+  }
+  .t-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:8px;display:block;}
+  .t-item h3{font-size:18px;margin-bottom:4px;}
+  .t-org{font-size:13.5px;color:var(--muted-2);margin-bottom:10px;font-family:'JetBrains Mono',monospace;}
+  .t-item p{color:var(--muted);font-size:14.5px;max-width:640px;}
+
+  /* CONTACT / FOOTER */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .contact-cards{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;}
+  .c-card{background:var(--card);padding:22px 24px;display:flex;gap:16px;align-items:flex-start;transition:.2s;}
+  .c-card:hover{background:#20262c;}
+  .c-card svg{flex-shrink:0;margin-top:2px;color:var(--accent);}
+  .c-card .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted-2);margin-bottom:4px;}
+  .c-card .val{font-size:15px;}
+  footer{border-top:1px solid var(--line);padding:32px 0;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);flex-wrap:wrap;gap:10px;}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .menu-btn{display:flex;}
+    .hero-inner{grid-template-columns:1fr;gap:50px;}
+    .photo-wrap{max-width:320px;order:-1;}
+    .about-grid,.skills-layout,.contact-grid{grid-template-columns:1fr;gap:40px;}
+    .fact span:last-child{max-width:70%;}
+    section{padding:80px 0;}
+    .wrap{padding:0 22px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>MGYF</div>
+    <ul class="nav-links">
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#kemampuan">Kemampuan</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#pendidikan">Pendidikan</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#tentang">Tentang</a>
+    <a href="#kemampuan">Kemampuan</a>
+    <a href="#pengalaman">Pengalaman</a>
+    <a href="#pendidikan">Pendidikan</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="border-top:none;padding-top:120px;">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">TEKNIK JARINGAN KOMPUTER &amp; TELEKOMUNIKASI</div>
+      <h1>Mochammad Galaxy<br>Yamilkha <span class="accent">Febre</span></h1>
+      <p class="lead">Siswa SMK Wikrama Bogor yang membangun fondasi di infrastruktur jaringan, cloud, dan keamanan siber — disiplin, cepat belajar, dan terbiasa bekerja dalam tim.</p>
+      <div class="btn-row">
+        <a href="mailto:mochammadgalaxyyamilkhafebre@smkwikrama.sch.id" class="btn btn-primary">Hubungi Saya →</a>
+        <a href="#kemampuan" class="btn btn-ghost">Lihat Kemampuan</a>
+      </div>
+      <div class="quick-meta">
+        <div><b>Jurusan</b>TJKT</div>
+        <div><b>Sekolah</b>SMK Wikrama</div>
+        <div><b>Lokasi</b>Sentul City, Bogor</div>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <div class="photo-frame">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+        <img src="img/image.png" alt="Foto profil Mochammad Galaxy Yamilkha Febre" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;display:block;">
+      </div>
+      <div class="status-tag"><span class="dot"></span>STATUS · TERSEDIA UNTUK MAGANG</div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">TENTANG</div>
+      <h2>Profil Singkat</h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>Seorang siswa jurusan <b>Teknik Jaringan Komputer dan Telekomunikasi</b> di SMK Wikrama Bogor. Saya individu yang disiplin, mudah belajar, dan memiliki kepribadian yang mudah beradaptasi dengan tim.</p>
+        <p>Saya sangat termotivasi untuk mempelajari <b>infrastruktur jaringan, teknologi cloud, dan keamanan siber</b>, dan akan terus mengembangkan diri untuk menjadi profesional IT yang kompeten dan adaptif.</p>
+        <p>Memiliki pengalaman dalam konfigurasi jaringan dengan <b>MikroTik</b>, administrasi server berbasis <b>Linux</b>, hingga penerapan layanan cloud di <b>AWS &amp; GCP</b>. Selain itu, saya juga terbiasa melakukan pengujian celah keamanan serta penanganan insiden siber.</p>
+      </div>
+      <div class="reveal">
+        <div class="fact-list">
+          <div class="fact"><span>SEKOLAH</span><span>SMK Wikrama, Kota Bogor</span></div>
+          <div class="fact"><span>PERIODE</span><span>2023 — 2026</span></div>
+          <div class="fact"><span>FOKUS</span><span>Jaringan · Cloud · Keamanan Siber</span></div>
+          <div class="fact"><span>DOMISILI</span><span>Sentul City, Kab. Bogor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEMAMPUAN -->
+<section id="kemampuan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">KEMAMPUAN</div>
+      <h2>Hard Skill &amp; Soft Skill</h2>
+    </div>
+    <div class="skills-layout">
+      <div class="reveal">
+        <div class="subhead">HARD SKILLS — DISUSUN SEPERTI ANTARMUKA JARINGAN</div>
+        <div class="iface-list">
+          <div class="iface">
+            <div class="iface-id">eth0</div>
+            <div><h3>Konfigurasi &amp; Manajemen Jaringan</h3><p>Konfigurasi dan pengelolaan jaringan menggunakan MikroTik.</p></div>
+          </div>
+          <div class="iface">
+            <div class="iface-id">eth1</div>
+            <div><h3>Administrasi Server Linux</h3><p>Mengelola sistem berbasis Linux untuk kebutuhan server dan layanan.</p></div>
+          </div>
+          <div class="iface">
+            <div class="iface-id">eth2</div>
+            <div><h3>Layanan Cloud — AWS &amp; GCP</h3><p>Penerapan dan pengelolaan layanan cloud di AWS dan Google Cloud Platform.</p></div>
+          </div>
+          <div class="iface">
+            <div class="iface-id">eth3</div>
+            <div><h3>Keamanan Siber &amp; Pemantauan Log</h3><p>Pengujian celah keamanan, penanganan insiden siber, dan pemantauan log sistem.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="subhead">SOFT SKILLS</div>
+        <div class="tag-cloud">
+          <span class="tag">Komunikasi</span>
+          <span class="tag">Mudah Belajar</span>
+          <span class="tag">Kepemimpinan</span>
+          <span class="tag">Kerja Tim</span>
+          <span class="tag">Manajemen Waktu</span>
+          <span class="tag">Disiplin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENGALAMAN -->
+<section id="pengalaman">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">ORGANISASI &amp; PENGALAMAN</div>
+      <h2>Rekam Jejak Organisasi</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <span class="t-date">2021 — 2026</span>
+        <h3>OSIS — MPR (Majelis Perwakilan Rayon)</h3>
+        <div class="t-org">SMK Wikrama</div>
+        <p>Berperan dalam organisasi yang merencanakan, mengoordinasikan, dan melaksanakan program kerja serta kegiatan sekolah untuk mengembangkan potensi, kepemimpinan, dan kreativitas peserta didik. Sebagai MPR, menjadi wadah aspirasi warga rayon, menjembatani komunikasi antara peserta didik dan pihak sekolah, mengawal pelaksanaan program kerja, serta menciptakan lingkungan rayon yang tertib dan kondusif.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">2022 — 2023</span>
+        <h3>Pembina Pramuka</h3>
+        <div class="t-org">Gerakan Pramuka</div>
+        <p>Membina, membimbing, mengarahkan, serta mengawasi seluruh kegiatan kepramukaan agar berjalan tertib, aman, dan sesuai dengan tujuan pendidikan karakter.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">Kegiatan</span>
+        <h3>FJOB — Forum OSIS Jawa Barat</h3>
+        <div class="t-org">Tim Media, Warkop Hilang Arah</div>
+        <p>Mengikuti kegiatan FJOB (Forum OSIS Jawa Barat) sebagai bagian dari tim media "Warkop Hilang Arah".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PENDIDIKAN -->
+<section id="pendidikan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">PENDIDIKAN</div>
+      <h2>Riwayat Pendidikan</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <span class="t-date">2023 — 2026</span>
+        <h3>SMK Wikrama</h3>
+        <div class="t-org">Kota Bogor · Teknik Jaringan Komputer &amp; Telekomunikasi</div>
+        <p>Menempuh pendidikan kejuruan dengan fokus pada jaringan komputer dan telekomunikasi.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">2021 — 2023</span>
+        <h3>SMP Daaruttaqwa</h3>
+        <div class="t-org">Pesantren Terpadu Daaruttaqwa, Cibinong — Kota Bogor</div>
+        <p>Menyelesaikan pendidikan menengah pertama di lingkungan pesantren terpadu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="eyebrow">KONTAK</div>
+        <h2 style="margin-bottom:18px;">Mari terhubung.</h2>
+        <p style="color:var(--muted);max-width:420px;">Terbuka untuk peluang magang, kolaborasi, maupun sekadar berdiskusi seputar jaringan, cloud, dan keamanan siber.</p>
+      </div>
+      <div class="contact-cards reveal">
+        <a class="c-card" href="tel:+62087761599148">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><div class="lbl">TELEPON / WHATSAPP</div><div class="val">0877-6159-9148</div></div>
+        </a>
+        <a class="c-card" href="mailto:mochammadgalaxyyamilkhafebre@smkwikrama.sch.id">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          <div><div class="lbl">EMAIL</div><div class="val" style="word-break:break-all;">mochammadgalaxyyamilkhafebre@smkwikrama.sch.id</div></div>
+        </a>
+        <div class="c-card">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="lbl">LOKASI</div><div class="val">Sentul City, Kabupaten Bogor</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 Mochammad Galaxy Yamilkha Febre</span>
+    <span>Dibuat dengan fokus pada kesederhanaan</span>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  menuBtn.addEventListener('click', () => mobilePanel.classList.toggle('open'));
+  mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobilePanel.classList.remove('open')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
